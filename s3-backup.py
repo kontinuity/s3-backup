@@ -1,4 +1,4 @@
-#!/usr/local/bin/python2.6
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 #  s3-backup.py: perform a backup of a path
@@ -140,7 +140,10 @@ if len(args) != 2:
 # connect and open bucket, no need to continue if we can't
 if s3bucket is not None:
   from boto.s3.connection import S3Connection
-  s3connection = S3Connection() if s3aws_key is None else S3Connection(s3aws_key,s3aws_secret)
+  if s3aws_key is None:
+    s3connection = S3Connection()
+  else:
+    s3connection = S3Connection(s3aws_key,s3aws_secret)
   
   try:
     bucket = s3connection.create_bucket(s3bucket)
