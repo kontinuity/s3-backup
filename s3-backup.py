@@ -153,7 +153,7 @@ if s3bucket is not None:
     rs = s3connection.get_all_buckets()
 
     sys.stderr.write("\nUse an available bucket or create a new one.\nAvailable buckets:\n\n")
-    for b in rs:
+    for b in rs:K
       sys.stderr.write("     %s" % b.name)
       
     sys.stderr.flush()
@@ -267,8 +267,8 @@ if archive_type:
   if bucket:
     print("Uploading %s to S3..." % archive_path)
     from boto.s3.key import Key
-    k = Key(bucket,name=os.path.basename(archive_path))
-    k.set_contents_from_filename(archive_path)
+    k = bucket.new_key(os.path.basename(archive_path))
+    k.set_contents_from_filename(archive_path, reduced_redundancy=True)
     
     if remove_local:
       print("Removing local copy of %s..." % archive_path)
