@@ -153,7 +153,7 @@ if s3bucket is not None:
     rs = s3connection.get_all_buckets()
 
     sys.stderr.write("\nUse an available bucket or create a new one.\nAvailable buckets:\n\n")
-    for b in rs:K
+    for b in rs:
       sys.stderr.write("     %s" % b.name)
       
     sys.stderr.flush()
